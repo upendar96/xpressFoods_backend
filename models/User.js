@@ -26,8 +26,14 @@ const userSchema= new  mongoose.Schema({
     wishlist: [{ productId: { type: Schema.Types.ObjectId,
        ref: 'Product' }}],
        
-    order: [{ orderId: { type: Schema.Types.ObjectId,
-      ref: 'Order' }}],
+    order: [{
+      items: [{
+        
+         productName: { type: String, required: true }, quantity: { type: Number, required: true }, price: { type: Number, required: true } 
+    }],
+       total: Number,
+       date: { type: Date, default: Date.now },
+     }],
 
       
       
