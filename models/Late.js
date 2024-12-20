@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schema({
+const lateSchema = new mongoose.Schema({
     productName: {
         type: String,
         required: true
@@ -9,10 +9,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    region: {
+    category: {
         type: [{
             type: String,
-            enum: ['veg', 'non-veg','chicken','mutton','fish','biriyanies','tiffins','meals','roties','smoothies','desert&icecreams']
+            enum: ['veg', 'non-veg']
         }]
     },
     image: {
@@ -30,6 +30,6 @@ const productSchema = new mongoose.Schema({
     }]
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Late = mongoose.model('Late', lateSchema);
 
-module.exports = Product
+module.exports = Late

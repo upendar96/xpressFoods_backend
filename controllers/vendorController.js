@@ -64,6 +64,15 @@ const getAllVendors = async(req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+const getAllDine = async(req, res) => {
+    try {
+        const dines = await Vendor.find().populate('dine');
+        res.json({ dines })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 
 
 const getVendorById = async(req, res) => {
@@ -71,12 +80,15 @@ const getVendorById = async(req, res) => {
 
     try {
         const vendor = await Vendor.findById(vendorId).populate('firm');
-        if (!vendor) {
+        const vendorl = await Vendor.findById(vendorId).populate('dine')
+        if (!vendor|| vendorl) {
             return res.status(404).json({ error: "Vendor not found" })
         }
         const vendorFirmId = vendor.firm[0]._id;
         const vendorFirmName=vendor.firm.firmName;
-        res.status(200).json({ vendorId, vendorFirmId, vendor,vendorFirmName })
+        const vendorDineId = vendorl.dine[0]._id;
+        const vendorDineName=vendorl.dine.dineName;
+        res.status(200).json({ vendorId, vendorFirmId, vendor,vendorFirmName ,vendorDineId,vendorDineName})
         console.log(vendorFirmId);
     } catch (error) {
         console.log(error);
@@ -85,4 +97,4 @@ const getVendorById = async(req, res) => {
 }
 
 
-module.exports = { vendorRegister, vendorLogin, getAllVendors, getVendorById }
+module.exports = { vendorRegister, vendorLogin, getAllVendors, getVendorById ,getAllDine}

@@ -21,7 +21,9 @@ const userSchema= new  mongoose.Schema({
     },
     cart: [{ productId: { type: Schema.Types.ObjectId, 
       ref: 'Product' },
-       quantity: { type: Number, default: 1 } }],
+       quantity: { type: Number, default: 1 },
+        firmName:String }] ,
+       
 
     wishlist: [{ productId: { type: Schema.Types.ObjectId,
        ref: 'Product' }}],
@@ -29,7 +31,9 @@ const userSchema= new  mongoose.Schema({
     order: [{
       items: [{
         
-         productName: { type: String, required: true }, quantity: { type: Number, required: true }, price: { type: Number, required: true } 
+         productName: { type: String, required: true }, 
+         quantity: { type: Number, required: true },
+          price: { type: Number, required: true } 
     }],
        total: Number,
        date: { type: Date, default: Date.now },

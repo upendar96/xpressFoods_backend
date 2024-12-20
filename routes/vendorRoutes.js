@@ -8,6 +8,7 @@ router.post('/login', vendorController.vendorLogin);
 
 
 router.get('/all-vendors', vendorController.getAllVendors);
+router.get('/all-dines', vendorController.getAllDine);
 router.get('/single-vendor/:vendorId', vendorController.getVendorById)
 
 module.exports = router;

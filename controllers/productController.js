@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 
 const addProduct = async(req, res) => {
     try {
-        const { productName, price, category, bestSeller, description } = req.body;
+        const { productName, price, region, bestSeller, description } = req.body;
         const image = req.file ? req.file.filename : undefined;
 
         const firmId = req.params.firmId;
@@ -31,7 +31,7 @@ const addProduct = async(req, res) => {
         const product = new Product({
             productName,
             price,
-            category,
+            region,
             bestSeller,
             description,
             image,
@@ -94,8 +94,9 @@ const search = async (req, res) => {
    
         const regex = new RegExp(query, 'i'); 
         const products = await Product.find({ productName: { $regex: regex } });
-        console.log(products);
-        res.status(200).json(products);
+        const firms = await Firm.find({ firmName: { $regex: regex } });
+        console.log(products,firms);
+        res.status(200).json({products,firms});
     } catch (error) {
         console.error('Error fetching search results:', error);
         res.status(500).json({ message: 'Internal server error' });

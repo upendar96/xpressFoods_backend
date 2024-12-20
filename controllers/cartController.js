@@ -1,7 +1,8 @@
 const User = require('../models/User');
 const Product = require('../models/Product');
+const Firm =require('../models/Firm')
 exports.addToCart = async (req, res) => {
-    const { userId, productId } = req.body;
+    const { userId, productId,firmId} = req.body;
 
 
 
@@ -15,12 +16,16 @@ exports.addToCart = async (req, res) => {
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
+        const firm = await Firm.findById(firmId);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
 
         const cartItem = user.cart.find(item => item.productId.toString() === productId);
         if (cartItem) {
             cartItem.quantity += 1;
         } else {
-            user.cart.push({ productId, quantity: 1 });
+            user.cart.push({ productId, quantity: 1,firmName:firm.firmName });
         }
 
 

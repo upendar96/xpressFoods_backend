@@ -18,7 +18,12 @@ const vendorSchema = new mongoose.Schema({
     firm: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Firm'
-    }]
+    }],
+    dine: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dine'
+    }],
+    
 
 });
 
